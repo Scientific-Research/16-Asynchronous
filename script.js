@@ -9,7 +9,7 @@ const countriesContainer = document.querySelector(".countries");
 const request = new XMLHttpRequest();
 // Request is an object => Type of httpRequest to get the data is GET!
 // https://github.com/public-apis/public-apis
-request.open("GET", "https://restcountries.com/v3.1/name/deutschland");
+request.open("GET", "https://restcountries.com/v3.1/name/portugal");
 request.send(); // => This send our GET request to the above URL!
 console.log(request.responseText);
 
