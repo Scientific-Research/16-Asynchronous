@@ -21,6 +21,10 @@ request.addEventListener("load", function () {
 
   // this.responseText is in JSON format which is a big string of text and what we need is JS actual object! Therfore, we have to use JSON.parse() to convert the JSON string text to JS obejcts!
 
-  const data = JSON.parse(this.responseText);
-  console.log(data); // Now, we have an object full of info about Germany
+  const [data] = JSON.parse(this.responseText);
+  console.log(data); // Now, we have an array containing an object full of info about Germany, therefore, we can destructure this object => after destructuring, we get only the object inside the array and no longer array is there!
+
+  // WITHOUT DESTRUCTURING, WE HAVE TO WRITE AS FOLLOWING: => BUT DESTRUCTURING IS MUCH MORE BEAUTIFUL THAN USING INDEXING IN AN ARRAY:
+  const data2 = JSON.parse(this.responseText)[0];
+  console.log(data2);
 });
