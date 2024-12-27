@@ -37,8 +37,8 @@ request.addEventListener("load", function () {
               data.population / 1000000
             ).toFixed(2)}M people
             </p>
-            <p class="country__row"><span>🗣️</span>${data.languages[0]}</p>
-            <p class="country__row"><span>💰</span>${data.currencies[0]}</p>
+            <p class="country__row"><span>🗣️</span>${data.languages.por}</p>
+            <p class="country__row"><span>💰</span>${data.currencies.EUR.name}</p>
           </div>
         </article>`;
 
