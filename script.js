@@ -9,7 +9,7 @@ const countriesContainer = document.querySelector(".countries");
 const request = new XMLHttpRequest();
 // Request is an object => Type of httpRequest to get the data is GET!
 // https://github.com/public-apis/public-apis
-request.open("GET", "https://restcountries.com/v3.1/name/germany");
+request.open("GET", "https://restcountries.com/v3.1/name/portugal");
 request.send(); // => This send our GET request to the above URL!
 
 // console.log(request.responseText); We will have here nothing
@@ -29,15 +29,20 @@ request.addEventListener("load", function () {
   console.log(data2);
 
   const html = `<article class="country">
-          <img class="country__img" src=${data.coatOfArms.png} />
+          <img class="country__img" src=${data.flag} />
           <div class="country__data">
-            <h3 class="country__name">${data.name.official}</h3>
+            <h3 class="country__name">${data.name}</h3>
             <h4 class="country__region">${data.region}</h4>
-            <p class="country__row"><span>👫</span>POP people</p>
-            <p class="country__row"><span>🗣️</span>${data.languages.deu}</p>
-            <p class="country__row"><span>💰</span>${data.currencies.Eur}</p>
+            <p class="country__row"><span>👫</span>${Number(
+              data.population / 1000000
+            ).toFixed(2)}
+            )}</p>
+            <p class="country__row"><span>🗣️</span>${data.languages[0]}</p>
+            <p class="country__row"><span>💰</span>${data.currencies[0]}</p>
           </div>
         </article>`;
 
   // form.insertAdjacentHTML("afterend", html);
+  // Here we have class countries as parent of our html here instead of form. We don't have form here!
+  countriesContainer.insertAdjacentHTML("beforeend", html);
 });
