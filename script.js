@@ -5,8 +5,8 @@ const countriesContainer = document.querySelector(".countries");
 
 ///////////////////////////////////////
 
-const renderCountry = (data) => {
-  const html = `<article class="country">
+const renderCountry = (data, className = "") => {
+  const html = `<article class="country ${className}">
     <img class="country__img" src=${data.flags.png} />
     <div class="country__data">
             <h3 class="country__name">${data.name.common}</h3>
@@ -94,7 +94,7 @@ const getCountryAndNeighbour = (...country) => {
         // NOTE: NO MATTER HOW MANY TIMES I RELOAD THE PAGE, SPAIN COMES ALWAYS AFTER PORTUGAL! => IT MEANS WE HAVE SEQUENCE(ORDER) HERE!
 
         // Render country 2 => Spain
-        renderCountry(data2);
+        renderCountry(data2, "neighbour"); // There is a special class when the country is neighbour => class="country ${className}"
       });
     });
   });
