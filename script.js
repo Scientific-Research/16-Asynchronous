@@ -137,13 +137,25 @@ getCountryAndNeighbour("usa"); // IT SHOWS US THE CANADA AS NEIGHBOUR COUNTRY
 
 console.log("------------------PROMISES-----------------------");
 
-const country = "germany";
-const request = fetch(`https://restcountries.com/v3.1/name/${country}`);
-console.log(request); // Promise {<pending>}
+// const country = "germany";
+// const request = fetch(`https://restcountries.com/v3.1/name/${country}`);
+// console.log(request); // Promise {<pending>}
 
 // We get immediately Promise, what is Promise:
 // An object that is used as a placeholder for the future result of an asynchronous operation.
-// LESS INFORMAL: A container for an async delivered value!
+// LESS INFORMAL: A container for an async delivered value OR A container for a future value!
 // Value: Example: Response from AJAX call!
 
 // NOTE: Instead of nesting callbacks, we can chain promises for a sequence of asynchronous operations: escaping callback hell :)
+
+const getCountryData = function (country) {
+  // the fetch returns a promise immediately as Pending state!
+  // On all promises, we can call then method! We pass in then method a callback function which will be executed as soon as the promise is fulfilled(the results are there!)
+  const request = fetch(`https://restcountries.com/v3.1/name/${country}`).then(
+    (response) => {
+      console.log(response);
+    }
+  );
+};
+
+getCountryData("germany");
