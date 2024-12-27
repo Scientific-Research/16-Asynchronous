@@ -206,6 +206,9 @@ const getCountryData2 = function (country) {
           // .catch((err) => alert(err))
           .catch((err) => {
             console.error(`${err} ☠️☠️☠️`);
+            renderError(
+              `ERROR: Something went Wrong ☠️☠️☠️ ${err.message}. Try again!`
+            );
           })
       );
     });
