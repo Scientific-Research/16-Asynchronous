@@ -4,7 +4,36 @@ const btn = document.querySelector(".btn-country");
 const countriesContainer = document.querySelector(".countries");
 
 ///////////////////////////////////////
-const getCountryData = (...country) => {
+
+const renderCountry = (data) => {
+  const html = `<article class="country">
+    <img class="country__img" src=${data.flags.png} />
+    <div class="country__data">
+            <h3 class="country__name">${data.name.common}</h3>
+            <h4 class="country__region">${data.region}</h4>
+            <p class="country__row"><span>👫</span>${Number(
+              data.population / 1000000
+            ).toFixed(2)}M people
+            </p>
+            <p class="country__row"><span>🗣️</span>${Object.values(
+              data.languages
+            )}</p>
+            <p class="country__row"><span>💰</span>${
+              Object.values(data.currencies)[0].name
+            }</p>
+              </div>
+              </article>`;
+
+  // form.insertAdjacentHTML("afterend", html);
+  // Here we have class countries as parent of our html here instead of form. We don't have form here!
+  countriesContainer.insertAdjacentHTML("beforeend", html);
+
+  // To meke it appear on the page, we have to change the opacity to 1:
+  countriesContainer.style.opacity = 1;
+};
+
+// const getCountryData = (...country) => {
+const getCountryAndNeighbour = (...country) => {
   console.log(country); // ['portugal', 'germany', 'usa']
 
   // Using forEach only because of the REST operator and created Array above:
@@ -33,30 +62,8 @@ const getCountryData = (...country) => {
       const data2 = JSON.parse(this.responseText)[0];
       console.log(data2);
 
-      const html = `<article class="country">
-    <img class="country__img" src=${data.flags.png} />
-    <div class="country__data">
-            <h3 class="country__name">${data.name.common}</h3>
-            <h4 class="country__region">${data.region}</h4>
-            <p class="country__row"><span>👫</span>${Number(
-              data.population / 1000000
-            ).toFixed(2)}M people
-            </p>
-            <p class="country__row"><span>🗣️</span>${Object.values(
-              data.languages
-            )}</p>
-            <p class="country__row"><span>💰</span>${
-              Object.values(data.currencies)[0].name
-            }</p>
-              </div>
-              </article>`;
-
-      // form.insertAdjacentHTML("afterend", html);
-      // Here we have class countries as parent of our html here instead of form. We don't have form here!
-      countriesContainer.insertAdjacentHTML("beforeend", html);
-
-      // To meke it appear on the page, we have to change the opacity to 1:
-      countriesContainer.style.opacity = 1;
+      // Now, we call this function:
+      renderCountry(data);
     });
   });
 };
@@ -64,7 +71,7 @@ const getCountryData = (...country) => {
 // It depends, the info for which Country arrives sooner, therefore, addEventListener will listen to that and the info are loaded completely for this country, then the cakll back function will be called and the info for this country will be shown!
 
 // That's why when i reload every time the page, the sequence for the flags of countries will change and the order of displaying the flah will change and is not fiexd! In this case, we can not control or set which flag comes first and which comes later! It depends the info of which country is arrived from the ONLINE-API sooner!
-getCountryData("portugal", "germany", "usa");
+getCountryAndNeighbour("portugal", "germany", "usa");
 
 // NOTE: OR USING REST OPERATOR TO PUT ALL THE COUNTRIES TOGETHRE AN AN ARRAY AND WE NO LONGER NEED TO CALL EVERY COUNTRY SEPARATELY!
 // getCountryData("germany");
