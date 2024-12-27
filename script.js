@@ -56,6 +56,9 @@ const getCountryData = (country) => {
   });
 };
 
+// It depends, the info for which Country arrives sooner, therefore, addEventListener will listen to that and the info are loaded completely for this country, then the cakll back function will be called and the info for this country will be shown!
+
+// That's why when i reload every time the page, the sequence for the flags of countries will change and the order of displaying the flah will change and is not fiexd! In this case, we can not control or set which flag comes first and which comes later! It depends the info of which country is arrived from the ONLINE-API sooner!
 getCountryData("portugal");
 getCountryData("germany");
 getCountryData("usa");
