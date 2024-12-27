@@ -38,19 +38,14 @@ const getCountryData = (country) => {
               data.population / 1000000
             ).toFixed(2)}M people
             </p>
-            <p class="country__row"><span>🗣️</span>${data.languages.deu}</p>
+            <p class="country__row"><span>🗣️</span>${Object.values(
+              data.languages
+            )}</p>
             <p class="country__row"><span>💰</span>${
               Object.values(data.currencies)[0].name
             }</p>
             </div>
             </article>`;
-
-    // data.currencies.EUR.name
-    // const currencies = data.currencies;
-    // const currency = Object.values(currencies)[0]; // Get the first currency object
-
-    // const currencyInfo = `<p class="country__row"><span>💰</span>${currency.name} (${currency.symbol})</p>`;
-    // console.log(currencyInfo);
 
     // form.insertAdjacentHTML("afterend", html);
     // Here we have class countries as parent of our html here instead of form. We don't have form here!
