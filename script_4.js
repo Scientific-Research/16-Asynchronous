@@ -108,7 +108,7 @@ const getCountryAndNeighbour = (...country) => {
 
 // getCountryAndNeighbour("portugal", "germany", "usa");
 // getCountryAndNeighbour("portugal");
-// getCountryAndNeighbour("usa"); // IT SHOWS US THE CANADA AS NEIGHBOUR COUNTRY
+getCountryAndNeighbour("usa"); // IT SHOWS US THE CANADA AS NEIGHBOUR COUNTRY
 
 // NOTE: OR USING REST OPERATOR TO PUT ALL THE COUNTRIES TOGETHRE AN AN ARRAY AND WE NO LONGER NEED TO CALL EVERY COUNTRY SEPARATELY!
 // getCountryData("germany");
@@ -148,21 +148,21 @@ console.log("------------------PROMISES-----------------------");
 
 // NOTE: Instead of nesting callbacks, we can chain promises for a sequence of asynchronous operations: escaping callback hell :)
 
-// const getCountryData = function (country) {
-//   // the fetch returns a promise immediately as Pending state!
-//   // On all promises, we can call then method! We pass in then method a callback function which will be executed as soon as the promise is fulfilled(the results are there!)
-//   const request = fetch(`https://restcountries.com/v3.1/name/${country}`)
-//     .then((response) => {
-//       console.log(response);
-//       return response.json(); // all resolved responses have json() method on fetch() and json() method returns a promise too!
-//     })
-//     .then((data) => {
-//       console.log(data);
-//       renderCountry(data[0]);
-//     });
-// };
+const getCountryData = function (country) {
+  // the fetch returns a promise immediately as Pending state!
+  // On all promises, we can call then method! We pass in then method a callback function which will be executed as soon as the promise is fulfilled(the results are there!)
+  const request = fetch(`https://restcountries.com/v3.1/name/${country}`)
+    .then((response) => {
+      console.log(response);
+      return response.json(); // all resolved responses have json() method on fetch() and json() method returns a promise too!
+    })
+    .then((data) => {
+      console.log(data);
+      renderCountry(data[0]);
+    });
+};
 
-// getCountryData("germany");
+getCountryData("germany");
 
 // NOTE: SECOND VERSION => very simplified one:
 const getCountryData2 = function (country) {
