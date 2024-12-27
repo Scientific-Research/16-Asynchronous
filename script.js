@@ -177,8 +177,8 @@ const getCountryData2 = function (country) {
   // Country 1
   fetch(`https://restcountries.com/v3.1/name/${country}`)
     .then(
-      (response) => response.json(),
-      (err) => alert(err)
+      (response) => response.json()
+      // (err) => alert(err)
     )
     .then((data) => {
       renderCountry(data[0]);
@@ -190,16 +190,18 @@ const getCountryData2 = function (country) {
       // Second AJAX call:
       // Country 2
       // Every then method returns a new promise and the next then method will handle the previous then method when it is a success one and get its success value!
-      return fetch(`https://restcountries.com/v3.1/alpha/${neighbour}`)
-        .then(
-          // JSON() has a promise too, that's why we have to add a then method again!
-          (response) => response.json(),
-          (err) => alert(err)
-        )
-        .then(([data]) => {
-          console.log(data);
-          [renderCountry(data, "neighbour")];
-        });
+      return (
+        fetch(`https://restcountries.com/v3.1/alpha/${neighbour}`)
+          .then(
+            // JSON() has a promise too, that's why we have to add a then method again!
+            (response) => response.json()
+            // (err) => alert(err)
+          )
+          .then(([data]) => renderCountry(data, "neighbour"))
+          // It is the best Practice to add the ERROR Catching at the end of the then chain methods => it will catches any error in any place of the whole chain mathods!
+          // .catch((err) => alert(err))
+          .catch((err) => console.error(`${err} ☠️☠️☠️`))
+      );
     });
 };
 
