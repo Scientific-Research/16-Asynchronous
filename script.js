@@ -9,7 +9,7 @@ const countriesContainer = document.querySelector(".countries");
 const request = new XMLHttpRequest();
 // Request is an object => Type of httpRequest to get the data is GET!
 // https://github.com/public-apis/public-apis
-request.open("GET", "https://restcountries.com/v3.1/name/deutschland");
+request.open("GET", "https://restcountries.com/v3.1/name/germany");
 request.send(); // => This send our GET request to the above URL!
 
 // console.log(request.responseText); We will have here nothing
@@ -27,4 +27,17 @@ request.addEventListener("load", function () {
   // WITHOUT DESTRUCTURING, WE HAVE TO WRITE AS FOLLOWING: => BUT DESTRUCTURING IS MUCH MORE BEAUTIFUL THAN USING INDEXING IN AN ARRAY:
   const data2 = JSON.parse(this.responseText)[0];
   console.log(data2);
+
+  const html = `<article class="country">
+          <img class="country__img" src=${data.coatOfArms.png} />
+          <div class="country__data">
+            <h3 class="country__name">${data.name.official}</h3>
+            <h4 class="country__region">${data.region}</h4>
+            <p class="country__row"><span>👫</span>POP people</p>
+            <p class="country__row"><span>🗣️</span>${data.languages.deu}</p>
+            <p class="country__row"><span>💰</span>${data.currencies.Eur}</p>
+          </div>
+        </article>`;
+
+  // form.insertAdjacentHTML("afterend", html);
 });
