@@ -74,8 +74,12 @@ const getCountryAndNeighbour = (...country) => {
 
       // A country without neighbour
       if (!neighbour) return;
-
       console.log(neighbour);
+
+      // AJAX call country 2
+      const request = new XMLHttpRequest();
+      request.open("GET", `https://restcountries.com/v3.1/alpha/${neighbour}`);
+      request.send(); // => This send our GET request to the above URL!
     });
   });
 };
