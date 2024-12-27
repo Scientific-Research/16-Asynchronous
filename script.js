@@ -117,19 +117,33 @@ getCountryAndNeighbour("usa"); // IT SHOWS US THE CANADA AS NEIGHBOUR COUNTRY
 // NOTE: A CALLBACK HELL AS FOLLOWING: => WE HAVE 5 setTimeOut() functions INSDIE ANOTHER ONE!
 // CALL BACK HELL IS PRETTY EASY IDENTIFY BY TRIANGUALR SHAPE(INDENTATION) WHICH FORMED AT THE LEFT SIDE!
 // THE PROBLEM WITH CALLBACK HELL IS THAT: IT IS DIFFICULT TO UNDERSTAND AND IT MAKES OUR CODE MESSY
+
 // THE SOLUTION TO THE CALLBACK HELL IS USING PROMISES WHICH IS AVAILABLE IN ES6!
-setTimeout(() => {
-  console.log("1 second passed!");
-  setTimeout(() => {
-    console.log("2 second passed!");
-    setTimeout(() => {
-      console.log("3 second passed!");
-      setTimeout(() => {
-        console.log("4 second passed!");
-        setTimeout(() => {
-          console.log("5 second passed!");
-        }, 1000);
-      }, 1000);
-    }, 1000);
-  }, 1000);
-}, 1000);
+// setTimeout(() => {
+//   console.log("1 second passed!");
+//   setTimeout(() => {
+//     console.log("2 second passed!");
+//     setTimeout(() => {
+//       console.log("3 second passed!");
+//       setTimeout(() => {
+//         console.log("4 second passed!");
+//         setTimeout(() => {
+//           console.log("5 second passed!");
+//         }, 1000);
+//       }, 1000);
+//     }, 1000);
+//   }, 1000);
+// }, 1000);
+
+console.log("------------------PROMISES-----------------------");
+
+const country = "germany";
+const request = fetch(`https://restcountries.com/v3.1/name/${country}`);
+console.log(request); // Promise {<pending>}
+
+// We get immediately Promise, what is Promise:
+// An object that is used as a placeholder for the future result of an asynchronous operation.
+// LESS INFORMAL: A container for an async delivered value!
+// Value: Example: Response from AJAX call!
+
+// NOTE: Instead of nesting callbacks, we can chain promises for a sequence of asynchronous operations: escaping callback hell :)
