@@ -68,8 +68,13 @@ const getCountryAndNeighbour = (...country) => {
       renderCountry(data);
 
       // Get neighbour country (2):
+
       // const neighbour = data.borders[0]; // read the first neighbour in the array!
       const [neighbour] = data.borders; // read the first neighbour using destructuring
+
+      // A country without neighbour
+      if (!neighbour) return;
+
       console.log(neighbour);
     });
   });
