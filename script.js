@@ -165,10 +165,34 @@ console.log("------------------PROMISES-----------------------");
 // getCountryData("germany");
 
 // NOTE: SECOND VERSION => very simplified one:
+// const getCountryData2 = function (country) {
+//   const request = fetch(`https://restcountries.com/v3.1/name/${country}`)
+//     .then((response) => response.json())
+//     .then((data) => renderCountry(data[0]));
+// };
+
+// getCountryData2("germany");
+
 const getCountryData2 = function (country) {
-  const request = fetch(`https://restcountries.com/v3.1/name/${country}`)
+  // Country 1
+  fetch(`https://restcountries.com/v3.1/name/${country}`)
     .then((response) => response.json())
-    .then((data) => renderCountry(data[0]));
+    .then((data) => {
+      renderCountry(data[0]);
+      // get the neighbour countries:
+      // Firts AJAX call:
+      const neighbour = data[0].borders[0];
+      if (!neighbour) return;
+
+      // Second AJAX call:
+      // Country 2
+      fetch(`https://restcountries.com/v3.1/alpha/${neighbour}`);
+      
+    });
 };
 
 getCountryData2("germany");
+
+console.log("------------------------CHAINING PROMISES---------------------");
+
+// using chaining promises to render neighbour countries besides initial country:
