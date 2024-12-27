@@ -196,15 +196,7 @@ const getCountryData2 = function (country) {
     });
 };
 
-// Error handling in Promises => Promise returned from fetch function rejected!
-
-btn.addEventListener("click", () => {
-  getCountryData2("germany");
-});
-
-// TWO WAYS TO HANDLE A REJECTED PROMISE:
-
-
+getCountryData2("germany");
 // getCountryData2("portugal");
 // getCountryData2("spain");
 
@@ -214,5 +206,3 @@ console.log("------------------------CHAINING PROMISES---------------------");
 // NOTE: If we want to get the neighbour of the neighbour of the neigbour and 10 more neighbours, we can use the flat chain of Promises using then method instead of CALLBACK HELL!
 
 // NOTE: WE HAVE TO TAKE CARE THAT WE SHOULD NOT put a CALLBACK inside another CALLBACK => THis works but it creates again the CALLBACK HELL! WE HAVE TO start to get the Promise outside of the previous then method and inside a new one! WE HAVE TO WRITE EVERY PROMISE IN A SEPARATE then METHOD AND THEN CHAIN THEM AND NOT INSIDE THE CALLBACK OF EACH OTHER!
-
-console.log("--------------------ERROR HANDLING IN PROMISES----------------");
