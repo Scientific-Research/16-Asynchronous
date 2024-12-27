@@ -50,6 +50,7 @@ const getCountryAndNeighbour = (...country) => {
     // console.log(request.responseText); We will have here nothing
 
     // The responseText will be accessible after the request has loaded
+    // NOTE: We have to use here a regular description function, otherwise, this keyword inside it will not work(exactly the same when we use arrow function)
     request.addEventListener("load", function () {
       // console.log(request.responseText); // OR using this keyword points to the request
       console.log(this.responseText); // this keyword refers to request object directly!
@@ -77,9 +78,21 @@ const getCountryAndNeighbour = (...country) => {
       console.log(neighbour);
 
       // AJAX call country 2
-      const request = new XMLHttpRequest();
-      request.open("GET", `https://restcountries.com/v3.1/alpha/${neighbour}`);
-      request.send(); // => This send our GET request to the above URL!
+      const request2 = new XMLHttpRequest();
+      request2.open("GET", `https://restcountries.com/v3.1/alpha/${neighbour}`);
+      request2.send(); // => This send our GET request to the above URL!
+
+      // we have now a new addEventListener and na new callback inside another one which is above addEventListener => in other words, the second request is inside the first request:
+      // NOTE: We have to use here a regular description function, otherwise, this keyword inside it will not work(exactly the same when we use arrow function)
+      request2.addEventListener("load", function () {
+        console.log(this.responseText); // OR console.log(request2.responseText);
+        // This data is in JSON format => a big string of Text
+
+        const [data2] = JSON.parse(this.responseText); // we need JS real objects, therefore, we have to use JSON.parse() to convert the data from JSON string text to Objects!
+        console.log(data2);
+      });
+
+      // NOTE: NO MATTER HOW MANY TIMES I RELOAD THE PAGE, SPAIN COMES ALWAYS AFTER PORTUGAL! => IT MEANS WE HAVE SEQUENCE(ORDER) HERE!
     });
   });
 };
