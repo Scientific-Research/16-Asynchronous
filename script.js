@@ -186,8 +186,9 @@ const getCountryData2 = function (country) {
 
       // Second AJAX call:
       // Country 2
-      fetch(`https://restcountries.com/v3.1/alpha/${neighbour}`);
-      
+      return fetch(`https://restcountries.com/v3.1/alpha/${neighbour}`)
+        .then((response) => response.json())
+        .then((data) => renderCountry(data[0], "neighbour"));
     });
 };
 
