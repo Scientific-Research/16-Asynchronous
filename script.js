@@ -13,11 +13,11 @@ const renderCountry = (data) => {
             <h4 class="country__region">${data.region}</h4>
             <p class="country__row"><span>👫</span>${Number(
               data.population / 1000000
-            ).toFixed(2)}M people
+            ).toFixed(1)}M people
             </p>
-            <p class="country__row"><span>🗣️</span>${Object.values(
-              data.languages
-            )}</p>
+            <p class="country__row"><span>🗣️</span>${
+              Object.values(data.languages)[0]
+            }</p>
             <p class="country__row"><span>💰</span>${
               Object.values(data.currencies)[0].name
             }</p>
@@ -90,9 +90,12 @@ const getCountryAndNeighbour = (...country) => {
 
         const [data2] = JSON.parse(this.responseText); // we need JS real objects, therefore, we have to use JSON.parse() to convert the data from JSON string text to Objects!
         console.log(data2);
-      });
 
-      // NOTE: NO MATTER HOW MANY TIMES I RELOAD THE PAGE, SPAIN COMES ALWAYS AFTER PORTUGAL! => IT MEANS WE HAVE SEQUENCE(ORDER) HERE!
+        // NOTE: NO MATTER HOW MANY TIMES I RELOAD THE PAGE, SPAIN COMES ALWAYS AFTER PORTUGAL! => IT MEANS WE HAVE SEQUENCE(ORDER) HERE!
+
+        // Render country 2 => Spain
+        renderCountry(data2);
+      });
     });
   });
 };
