@@ -186,14 +186,21 @@ const getCountryData2 = function (country) {
 
       // Second AJAX call:
       // Country 2
+      // Every then method returns a new promise and the next then method will handle the previous then method when it is a success one and get its success value!
       return fetch(`https://restcountries.com/v3.1/alpha/${neighbour}`)
-        .then((response) => response.json())
-        .then((data) => renderCountry(data[0], "neighbour"));
+        .then((response) => response.json()) // JSON() has a promise too, that's why we have to add a then method again!
+        .then(([data]) => {
+          console.log(data);
+          [renderCountry(data, "neighbour")];
+        });
     });
 };
 
 getCountryData2("germany");
+// getCountryData2("portugal");
+// getCountryData2("spain");
 
 console.log("------------------------CHAINING PROMISES---------------------");
 
 // using chaining promises to render neighbour countries besides initial country:
+// NOTE: If we want to get the neighbour of the neighbour of the neigbour and 10 more neighbours, we can use the flat chain of Promises using then method instead of CALLBACK HELL!
