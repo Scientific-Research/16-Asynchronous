@@ -25,13 +25,15 @@ const renderCountry = (data, className = "") => {
   countriesContainer.insertAdjacentHTML("beforeend", html);
 
   // To meke it appear on the page, we have to change the opacity to 1:
-  countriesContainer.style.opacity = 1;
+  // I added to finally and commented it out here, because anyway it has to be happen no matter of success for promise or a failed promise!
+  // countriesContainer.style.opacity = 1;
 };
 
 const renderError = (msg) => {
   // It does the same like insertAdjacentHtml but with text, that's why i added the msg to that(last time a html file added with insertAdjacentHtml)
   countriesContainer.insertAdjacentText("beforeend", msg);
-  countriesContainer.style.opacity = 1; // In this case, the container would be visible!
+  // I added to finally and commented it out here, because anyway it has to be happen no matter of success for promise or a failed promise!
+  // countriesContainer.style.opacity = 1; // In this case, the container would be visible!
 };
 
 ////////////////////////////////////////////////////////////
@@ -211,7 +213,10 @@ const getCountryData2 = function (country) {
     .finally(() => {
       // This callback function would be called always, it doesn't matter if the PROMISE is ACCEPTED or FAILED! then method is only called when the PROMISE is fullfilled and catch method is called when the PROMISE is REJECTED! THESE ARE DIFFERENCES BETWEEN THESE THREE PROMISE METHODS!
       // WE USE FINALLY THAT ALWAYS HAPPENS NO MATTER OF THE RESULT OF PROMISE!
-      // One Example is 
+      // One Example is hidding a Spinner when the data is already downloaded and is used for async applications like the spinner here and no matter if the loading the data was success or failed the spinner is anyway start to spinning when the data start to loaing and hides when the loading the data was already finished!
+      // In our Case, we have to fade in our container:
+      // No matter, if we have a success Promise or a failed Promise, for both cases, we need to fade in our containetr:
+      countriesContainer.style.opacity = 1;
     });
 };
 
