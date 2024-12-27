@@ -176,7 +176,10 @@ console.log("------------------PROMISES-----------------------");
 const getCountryData2 = function (country) {
   // Country 1
   fetch(`https://restcountries.com/v3.1/name/${country}`)
-    .then((response) => response.json())
+    .then(
+      (response) => response.json(),
+      (err) => alert(err)
+    )
     .then((data) => {
       renderCountry(data[0]);
       // get the neighbour countries:
@@ -188,7 +191,11 @@ const getCountryData2 = function (country) {
       // Country 2
       // Every then method returns a new promise and the next then method will handle the previous then method when it is a success one and get its success value!
       return fetch(`https://restcountries.com/v3.1/alpha/${neighbour}`)
-        .then((response) => response.json()) // JSON() has a promise too, that's why we have to add a then method again!
+        .then(
+          // JSON() has a promise too, that's why we have to add a then method again!
+          (response) => response.json(),
+          (err) => alert(err)
+        )
         .then(([data]) => {
           console.log(data);
           [renderCountry(data, "neighbour")];
@@ -202,9 +209,6 @@ btn.addEventListener("click", () => {
   getCountryData2("germany");
 });
 
-// TWO WAYS TO HANDLE A REJECTED PROMISE:
-
-
 // getCountryData2("portugal");
 // getCountryData2("spain");
 
@@ -216,3 +220,6 @@ console.log("------------------------CHAINING PROMISES---------------------");
 // NOTE: WE HAVE TO TAKE CARE THAT WE SHOULD NOT put a CALLBACK inside another CALLBACK => THis works but it creates again the CALLBACK HELL! WE HAVE TO start to get the Promise outside of the previous then method and inside a new one! WE HAVE TO WRITE EVERY PROMISE IN A SEPARATE then METHOD AND THEN CHAIN THEM AND NOT INSIDE THE CALLBACK OF EACH OTHER!
 
 console.log("--------------------ERROR HANDLING IN PROMISES----------------");
+
+// TWO WAYS TO HANDLE A REJECTED PROMISE:
+// The first callback function in then method is for the successed Promise and we can add the second one for the rejected Promise!
