@@ -29,7 +29,7 @@ request.addEventListener("load", function () {
   console.log(data2);
 
   const html = `<article class="country">
-          <img class="country__img" src=${data.flag} />
+          <img class="country__img" src=${data.flags.png} />
           <div class="country__data">
             <h3 class="country__name">${data.name}</h3>
             <h4 class="country__region">${data.region}</h4>
@@ -45,4 +45,7 @@ request.addEventListener("load", function () {
   // form.insertAdjacentHTML("afterend", html);
   // Here we have class countries as parent of our html here instead of form. We don't have form here!
   countriesContainer.insertAdjacentHTML("beforeend", html);
+
+  // To meke it appear on the page, we have to change the opacity to 1:
+  countriesContainer.style.opacity = 1;
 });
