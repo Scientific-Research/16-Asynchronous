@@ -163,3 +163,12 @@ const getCountryData = function (country) {
 };
 
 getCountryData("germany");
+
+// NOTE: SECOND VERSION => very simplified one:
+const getCountryData2 = function (country) {
+  const request = fetch(`https://restcountries.com/v3.1/name/${country}`)
+    .then((response) => response.json())
+    .then((data) => renderCountry(data[0]));
+};
+
+getCountryData2("germany");
