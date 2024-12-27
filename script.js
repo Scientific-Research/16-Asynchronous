@@ -95,6 +95,8 @@ const getCountryAndNeighbour = (...country) => {
 
         // Render country 2 => Spain
         renderCountry(data2, "neighbour"); // There is a special class when the country is neighbour => class="country ${className}"
+
+        // NOTE: BUT IMAGINE THAT WE WANTED TO DISPLAY THE NEIGHBOUR OF THE NEIGHBOUR OF THE ... => 10 LEVELS OF NEIGBOURS, THEREFORE WE HAVE TO GO INSIDE A NESTED CALLBACK FUNCTION FOR 10 TIMES => WE NEED HERE AT THE END A *** CALL BACK HELL *** => WHEN WE HAVE A LOT OF NESTED CALL BACKS IN ORDER TO EXECUTE ASYNC TASKS IN SEQUENCE!
       });
     });
   });
@@ -105,8 +107,28 @@ const getCountryAndNeighbour = (...country) => {
 // That's why when i reload every time the page, the sequence for the flags of countries will change and the order of displaying the flah will change and is not fiexd! In this case, we can not control or set which flag comes first and which comes later! It depends the info of which country is arrived from the ONLINE-API sooner!
 
 // getCountryAndNeighbour("portugal", "germany", "usa");
-getCountryAndNeighbour("portugal");
+// getCountryAndNeighbour("portugal");
+getCountryAndNeighbour("usa"); // IT SHOWS US THE CANADA AS NEIGHBOUR COUNTRY
 
 // NOTE: OR USING REST OPERATOR TO PUT ALL THE COUNTRIES TOGETHRE AN AN ARRAY AND WE NO LONGER NEED TO CALL EVERY COUNTRY SEPARATELY!
 // getCountryData("germany");
 // getCountryData("usa");
+
+// NOTE: A CALLBACK HELL AS FOLLOWING: => WE HAVE 5 setTimeOut() functions INSDIE ANOTHER ONE!
+// CALL BACK HELL IS PRETTY EASY IDENTIFY BY TRIANGUALR SHAPE(INDENTATION) WHICH FORMED AT THE LEFT SIDE!
+// THE PROBLEM WITH CALLBACK HELL IS THAT: IT IS DIFFICULT TO UNDERSTAND AND IT MAKES OUR CODE MESSY
+setTimeout(() => {
+  console.log("1 second passed!");
+  setTimeout(() => {
+    console.log("2 second passed!");
+    setTimeout(() => {
+      console.log("3 second passed!");
+      setTimeout(() => {
+        console.log("4 second passed!");
+        setTimeout(() => {
+          console.log("5 second passed!");
+        }, 1000);
+      }, 1000);
+    }, 1000);
+  }, 1000);
+}, 1000);
