@@ -3,26 +3,22 @@
 const btn = document.querySelector(".btn-country");
 const countriesContainer = document.querySelector(".countries");
 
-///////////////////////////////////////
-
 const renderCountry = (data, className = "") => {
   const html = `<article class="country ${className}">
-    <img class="country__img" src=${data.flags.png} />
-    <div class="country__data">
-            <h3 class="country__name">${data.name.common}</h3>
-            <h4 class="country__region">${data.region}</h4>
-            <p class="country__row"><span>👫</span>${Number(
-              data.population / 1000000
-            ).toFixed(1)}M people
-            </p>
-            <p class="country__row"><span>🗣️</span>${
-              Object.values(data.languages)[0]
-            }</p>
-            <p class="country__row"><span>💰</span>${
-              Object.values(data.currencies)[0].name
-            }</p>
-              </div>
-              </article>`;
+  <img class="country__img" src=${data.flags.png} />
+  <div class="country__data">
+  <h3 class="country__name">${data.name.common}</h3>
+  <h4 class="country__region">${data.region}</h4>
+  <p class="country__row"><span>👫</span>${Number(
+    data.population / 1000000
+  ).toFixed(1)}M people
+  </p>
+  <p class="country__row"><span>🗣️</span>${Object.values(data.languages)[0]}</p>
+  <p class="country__row"><span>💰</span>${
+    Object.values(data.currencies)[0].name
+  }</p>
+  </div>
+  </article>`;
 
   // form.insertAdjacentHTML("afterend", html);
   // Here we have class countries as parent of our html here instead of form. We don't have form here!
@@ -31,6 +27,14 @@ const renderCountry = (data, className = "") => {
   // To meke it appear on the page, we have to change the opacity to 1:
   countriesContainer.style.opacity = 1;
 };
+
+const renderError = (msg) => {
+  // It does the same like insertAdjacentHtml but with text, that's why i added the msg to that(last time a html file added with insertAdjacentHtml)
+  countriesContainer.insertAdjacentText("beforeend", msg);
+  countriesContainer.style.opacity = 1; // In this case, the container would be visible!
+};
+
+////////////////////////////////////////////////////////////
 
 // const getCountryData = (...country) => {
 const getCountryAndNeighbour = (...country) => {
@@ -200,7 +204,9 @@ const getCountryData2 = function (country) {
           .then(([data]) => renderCountry(data, "neighbour"))
           // It is the best Practice to add the ERROR Catching at the end of the then chain methods => it will catches any error in any place of the whole chain mathods!
           // .catch((err) => alert(err))
-          .catch((err) => console.error(`${err} ☠️☠️☠️`))
+          .catch((err) => {
+            console.error(`${err} ☠️☠️☠️`);
+          })
       );
     });
 };
