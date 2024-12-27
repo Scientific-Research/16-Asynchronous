@@ -201,11 +201,17 @@ const getCountryData2 = function (country) {
     .then(([data]) => renderCountry(data, "neighbour"))
     // It is the best Practice to add the ERROR Catching at the end of the then chain methods => it will catches any error in any place of the whole chain mathods!
     // .catch((err) => alert(err))
+    // err is an object in JS and one of its most useful method is message method!
     .catch((err) => {
       console.error(`${err} ☠️☠️☠️`);
       renderError(
         `ERROR: Something went Wrong ☠️☠️☠️ ${err.message}. Try again!`
       );
+    })
+    .finally(() => {
+      // This callback function would be called always, it doesn't matter if the PROMISE is ACCEPTED or FAILED! then method is only called when the PROMISE is fullfilled and catch method is called when the PROMISE is REJECTED! THESE ARE DIFFERENCES BETWEEN THESE THREE PROMISE METHODS!
+      // WE USE FINALLY THAT ALWAYS HAPPENS NO MATTER OF THE RESULT OF PROMISE!
+      // One Example is 
     });
 };
 
