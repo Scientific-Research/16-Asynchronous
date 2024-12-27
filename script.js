@@ -151,11 +151,15 @@ console.log("------------------PROMISES-----------------------");
 const getCountryData = function (country) {
   // the fetch returns a promise immediately as Pending state!
   // On all promises, we can call then method! We pass in then method a callback function which will be executed as soon as the promise is fulfilled(the results are there!)
-  const request = fetch(`https://restcountries.com/v3.1/name/${country}`).then(
-    (response) => {
+  const request = fetch(`https://restcountries.com/v3.1/name/${country}`)
+    .then((response) => {
       console.log(response);
-    }
-  );
+      return response.json(); // all resolved responses have json() method on fetch() and json() method returns a promise too!
+    })
+    .then((data) => {
+      console.log(data);
+      renderCountry(data[0]);
+    });
 };
 
 getCountryData("germany");
