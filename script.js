@@ -179,10 +179,8 @@ console.log("------------------PROMISES-----------------------");
 
 // getCountryData2("germany");
 
-const country = "germany";
-const url = `https://restcountries.com/v3.1/name/${country}`;
-
 const getJSON = (url, errorMsg = "Something went wrong!") => {
+  // NOTE: I have to return the fetch method => In this case, it return Promise like other then methods and therefore, I can chain it to other then methods below!
   return fetch(url).then((response) => {
     console.log(response);
     // If we give a correct country name, we will get response.ok:true and response.status: 200
@@ -199,15 +197,18 @@ const getJSON = (url, errorMsg = "Something went wrong!") => {
   });
 };
 
-const getCountryData2 = function () {
+const getCountryData2 = function (country) {
   // Country 1
-  getJSON(url)
+  getJSON(
+    `https://restcountries.com/v3.1/name/${country}`,
+    "Country not found!"
+  )
     .then((data) => {
       renderCountry(data[0]);
       // get the neighbour countries:
       // Firts AJAX call:
-      const neighbour = data[0].borders[0];
-      // const neighbour = "sdkfjh";
+      // const neighbour = data[0].borders[0];
+      const neighbour = "sdkfjh";
       if (!neighbour) return;
 
       // Second AJAX call:
@@ -248,8 +249,7 @@ const getCountryData2 = function () {
 // Error handling in Promises => Promise returned from fetch function rejected!
 
 btn.addEventListener("click", () => {
-  getCountryData2();
-  // getCountryData2("germany");
+  getCountryData2("germany");
   // getCountryData2("sdklhf");
 });
 
