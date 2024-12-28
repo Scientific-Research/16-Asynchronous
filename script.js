@@ -205,12 +205,19 @@ const getCountryData2 = function (country) {
   )
     .then((data) => {
       renderCountry(data[0]);
+      console.log(data[0]);
       // get the neighbour countries:
       // Firts AJAX call:
+
+      if (data[0].borders === undefined) {
+        throw new Error("No neighbour found!");
+      }
       const neighbour = data[0].borders[0];
 
+      // const neighbour = Object.values(data[0].borders);
+
       // const neighbour = "sdkfjh";
-      if (!neighbour) throw new Error("No neighbour found!");
+      // if (!neighbour) throw new Error("No neighbour found!");
 
       // Second AJAX call:
       // Country 2
@@ -221,7 +228,13 @@ const getCountryData2 = function (country) {
         "Country not found!"
       );
     })
-    .then(([data]) => renderCountry(data, "neighbour"))
+    .then(([data]) => {
+      // NOTE: Using below command, we get only values of an object and not keys and is suitable when we have variable keys for a property!
+      // console.log(Object.values(data.currencies)); // {name: 'Euro', symbol: '€'}
+
+      renderCountry(data, "neighbour");
+    })
+
     // It is the best Practice to add the ERROR Catching at the end of the then chain methods => it will catches any error in any place of the whole chain mathods!
     // .catch((err) => alert(err))
     // err is an object in JS and one of its most useful method is message method!
