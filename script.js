@@ -200,7 +200,8 @@ const getCountryData2 = function (country) {
       renderCountry(data[0]);
       // get the neighbour countries:
       // Firts AJAX call:
-      const neighbour = data[0].borders[0];
+      // const neighbour = data[0].borders[0];
+      const neighbour = "sdkfjh";
       if (!neighbour) return;
 
       // Second AJAX call:
@@ -210,7 +211,12 @@ const getCountryData2 = function (country) {
     })
     .then(
       // JSON() has a promise too, that's why we have to add a then method again!
-      (response) => response.json()
+      (response) => {
+        if (!response.ok) {
+          throw new Error(`Country not found! ${response.status}`);
+        }
+        return response.json();
+      }
       // (err) => alert(err)
     )
     .then(([data]) => renderCountry(data, "neighbour"))
@@ -236,8 +242,8 @@ const getCountryData2 = function (country) {
 // Error handling in Promises => Promise returned from fetch function rejected!
 
 btn.addEventListener("click", () => {
-  // getCountryData2("germany");
-  getCountryData2("sdklhf");
+  getCountryData2("germany");
+  // getCountryData2("sdklhf");
 });
 
 // getCountryData2("portugal");
