@@ -182,7 +182,16 @@ console.log("------------------PROMISES-----------------------");
 const getCountryData2 = function (country) {
   // Country 1
   fetch(`https://restcountries.com/v3.1/name/${country}`)
-    .then((response) => response.json())
+    .then((response) => {
+      console.log(response);
+      // If we give a correct country name, we will get response.ok:true and response.status: 200
+      // If we give an incorrect country name, we will get response.ok:false and response.status:404
+
+      if (!response.ok) {
+        throw new Error(`Counry not found! ${response.status}`);
+      }
+      return response.json();
+    })
     .then((data) => {
       renderCountry(data[0]);
       // get the neighbour countries:
@@ -223,7 +232,8 @@ const getCountryData2 = function (country) {
 // Error handling in Promises => Promise returned from fetch function rejected!
 
 btn.addEventListener("click", () => {
-  getCountryData2("germany");
+  // getCountryData2("germany");
+  getCountryData2("sdklhf");
 });
 
 // getCountryData2("portugal");
