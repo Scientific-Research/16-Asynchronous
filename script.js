@@ -207,9 +207,10 @@ const getCountryData2 = function (country) {
       renderCountry(data[0]);
       // get the neighbour countries:
       // Firts AJAX call:
-      // const neighbour = data[0].borders[0];
-      const neighbour = "sdkfjh";
-      if (!neighbour) return;
+      const neighbour = data[0].borders[0];
+
+      // const neighbour = "sdkfjh";
+      if (!neighbour) throw new Error("No neighbour found!");
 
       // Second AJAX call:
       // Country 2
@@ -243,7 +244,9 @@ const getCountryData2 = function (country) {
 // Error handling in Promises => Promise returned from fetch function rejected!
 
 btn.addEventListener("click", () => {
-  getCountryData2("germany");
+  getCountryData2("Australia");
+  // getCountryData2("britain");
+  // getCountryData2("germany");
   // getCountryData2("sdklhf");
 });
 
