@@ -178,8 +178,12 @@ console.log("------------------PROMISES-----------------------");
 // };
 
 // getCountryData2("germany");
-const getJSON = (country) => {
-  fetch(`https://restcountries.com/v3.1/name/${country}`).then((response) => {
+
+const country = "germany";
+const url = `https://restcountries.com/v3.1/name/${country}`;
+
+const getJSON = (url, errorMsg = "Something went wrong!") => {
+  return fetch(url).then((response) => {
     console.log(response);
     // If we give a correct country name, we will get response.ok:true and response.status: 200
     // If we give an incorrect country name, we will get response.ok:false and response.status:404
@@ -189,35 +193,21 @@ const getJSON = (country) => {
     // The err.message that we see in catch() handler gets exactly the below message => Counry not found! ${response.status} and display it on the page!
     if (!response.ok) {
       // throw is like return, it returns the error!
-      throw new Error(`Counry not found! ${response.status}`);
+      throw new Error(`${errorMsg} ${response.status}`);
     }
     return response.json();
   });
 };
 
-const getCountryData2 = function (country) {
+const getCountryData2 = function () {
   // Country 1
-  fetch(`https://restcountries.com/v3.1/name/${country}`)
-    .then((response) => {
-      console.log(response);
-      // If we give a correct country name, we will get response.ok:true and response.status: 200
-      // If we give an incorrect country name, we will get response.ok:false and response.status:404
-
-      // when the response.ok is false, the promise which is returns from then method is rejected and the current then method terminates immediately! This rejected promise will propagate all the way down to the catch() handler below!
-
-      // The err.message that we see in catch() handler gets exactly the below message => Counry not found! ${response.status} and display it on the page!
-      if (!response.ok) {
-        // throw is like return, it returns the error!
-        throw new Error(`Counry not found! ${response.status}`);
-      }
-      return response.json();
-    })
+  getJSON(url)
     .then((data) => {
       renderCountry(data[0]);
       // get the neighbour countries:
       // Firts AJAX call:
-      // const neighbour = data[0].borders[0];
-      const neighbour = "sdkfjh";
+      const neighbour = data[0].borders[0];
+      // const neighbour = "sdkfjh";
       if (!neighbour) return;
 
       // Second AJAX call:
@@ -258,7 +248,8 @@ const getCountryData2 = function (country) {
 // Error handling in Promises => Promise returned from fetch function rejected!
 
 btn.addEventListener("click", () => {
-  getCountryData2("germany");
+  getCountryData2();
+  // getCountryData2("germany");
   // getCountryData2("sdklhf");
 });
 
