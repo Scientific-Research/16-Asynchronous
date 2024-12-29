@@ -9,3 +9,6 @@ const lotteryPromise = new Promise((resolve, reject) => {
   }
   reject("You lost your money 💩");
 });
+
+// A promise is a special kind of an object, that's why lotteryPromise variable would be an object too and we can call a then method on that:
+lotteryPromise.then((res) => console.log(res)).catch((err) => console.err(err));
