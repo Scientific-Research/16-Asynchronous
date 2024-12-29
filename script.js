@@ -83,3 +83,10 @@ wait2(1)
     console.log("-----I waited for 5 seconds!----");
     // return wait(1); // There is no further then() method, therfore, we don't need to return the wait(1)!
   });
+
+// When we write the Promise in this way, it will execute immediately, because it goes to the MicroTask Queue and we had that already!
+// Resolved value which is 'abc' returns to then() method and is displayed in console.log()!
+Promise.resolve("abc").then((x) => console.log(x));
+
+// Due to reject, it doesn't return any value to then method, therefore, we write catch() method instead! catch() method catches the Error and display it in console.log()!
+Promise.reject(new Error("Problem")).catch((x) => console.error(x));
