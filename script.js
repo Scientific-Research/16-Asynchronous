@@ -84,7 +84,7 @@ wait2(1)
     // return wait(1); // There is no further then() method, therfore, we don't need to return the wait(1)!
   });
 
-// When we write the Promise in this way, it will execute immediately, because it goes to the MicroTask Queue and we had that already!
+// When we write the Promise in this way, it will execute immediately, because it goes to the MicroTask Queue and we had that already! => They are displayed at the very beginning of the console.log() => MicroTask executes always first!
 // Resolved value which is 'abc' returns to then() method and is displayed in console.log()!
 Promise.resolve("abc").then((x) => console.log(x));
 
