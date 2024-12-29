@@ -19,3 +19,11 @@ const lotteryPromise = new Promise((resolve, reject) => {
 lotteryPromise
   .then((res) => console.log(res))
   .catch((err) => console.error(err));
+
+// A more REALISTIC Example => Promisifying setTimeout
+const wait = (seconds) => {
+  // We don't need the reject here, because a Timer will never fail, Therefore, we don't need to write it here! Promise is like array method(map) => In map, there are three parameters, but most of the time, we need one or maximum 2 of them!
+
+  // Callback function here would be simply resolve and we don't need to pass in any value in resolve function like above, This is not mandatory for a resolve function => NO resolved values are needed! We just need to wait our resolve() function with a certain amount of time here!
+  return new Promise((resolve) => setTimeout(resolve, seconds * 1000));
+};
