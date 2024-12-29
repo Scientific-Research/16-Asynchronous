@@ -13,8 +13,8 @@ setTimeout(() => {
 Promise.resolve("Resolved Promise 1").then((res) => console.log(res));
 console.log("Test end");
 
-// The sequence of execution:
+// The order of execution:
 // Test start to the Console....
 // Test end
-// Resolved Promise 1
-// 0 sec timer!
+// Resolved Promise 1 => MicroTask Queue => has priority over the callback queues
+// 0 sec timer! => Regular Callback Queue
