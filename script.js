@@ -81,5 +81,5 @@ wait2(1)
   })
   .then(() => {
     console.log("-----I waited for 5 seconds!----");
-    return wait(1);
+    // return wait(1); // There is no further then() method, therfore, we don't need to return the wait(1)!
   });
