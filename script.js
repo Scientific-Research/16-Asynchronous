@@ -25,8 +25,16 @@ const wait = (seconds) => {
   // We don't need the reject here, because a Timer will never fail, Therefore, we don't need to write it here! Promise is like array method(map) => In map, there are three parameters, but most of the time, we need one or maximum 2 of them!
 
   // Callback function here would be simply resolve and we don't need to pass in any value in resolve function like above, This is not mandatory for a resolve function => NO resolved values are needed! We just need to wait our resolve() function with a certain amount of time here!
+  // resolve function will be executed for example after 2 seconds!
   return new Promise((resolve) => setTimeout(resolve, seconds * 1000));
 };
 
-// CONSUME THE PROMISE: This create a promise which waits for 2 seconds and after that our Promise is resolved! Inside then method, we don't have any value because Timer doesn't deliver any value! We just need to display something in console.log()
-wait(2).then(() => console.log("I waited for 2 seconds!"));
+// CONSUME THE PROMISE: This create a promise which waits for 2 seconds and after that our Promise is resolved! Inside then method, we don't have any value because Timer doesn't deliver any value! We just need to display something in console.log() or we can run any code there that should be executed after 2 seconds!
+wait(2)
+  .then(() => {
+    console.log("I waited for 2 seconds!");
+    return wait(1);
+  })
+  .then(() => console.log("I waited for 1 second!"));
+
+// WE HAVE ABOVE AGAIN A NICE CHAIN OF ASYNCHRONOUS BEHAVIOUR THAT HAPPENS NICELY IN A SEQUENCE AND ALL WITHOUT THE CALLBACK HELL!
