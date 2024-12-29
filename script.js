@@ -38,3 +38,48 @@ wait(2)
   .then(() => console.log("I waited for 1 second!"));
 
 // WE HAVE ABOVE AGAIN A NICE CHAIN OF ASYNCHRONOUS BEHAVIOUR THAT HAPPENS NICELY IN A SEQUENCE AND ALL WITHOUT THE CALLBACK HELL!
+
+// NOTE: WE can do the above strategy for below CALLBACK HELL:
+// THE SOLUTION TO THE CALLBACK HELL IS USING PROMISES WHICH IS AVAILABLE IN ES6!
+// setTimeout(() => {
+//   console.log("1 second passed!");
+//   setTimeout(() => {
+//     console.log("2 second passed!");
+//     setTimeout(() => {
+//       console.log("3 second passed!");
+//       setTimeout(() => {
+//         console.log("4 second passed!");
+//         setTimeout(() => {
+//           console.log("5 second passed!");
+//         }, 1000);
+//       }, 1000);
+//     }, 1000);
+//   }, 1000);
+// }, 1000);
+
+// THE SOLUTION USING A NICE CHAIN OF ASYNCHRONOUS BEHAVIOUR:
+const wait2 = (seconds) => {
+  return new Promise((resolve) => setTimeout(resolve, seconds * 1000));
+};
+
+wait2(1)
+  .then(() => {
+    console.log("-----I waited for 1 seconds!----");
+    return wait(1);
+  })
+  .then(() => {
+    console.log("-----I waited for 2 seconds!----");
+    return wait(1);
+  })
+  .then(() => {
+    console.log("-----I waited for 3 seconds!----");
+    return wait(1);
+  })
+  .then(() => {
+    console.log("-----I waited for 4 seconds!----");
+    return wait(1);
+  })
+  .then(() => {
+    console.log("-----I waited for 5 seconds!----");
+    return wait(1);
+  });
