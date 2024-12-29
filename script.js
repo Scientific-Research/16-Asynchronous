@@ -17,12 +17,10 @@ console.log("Getting Position");
 const getPosition = () => {
   return new Promise((resolve, reject) =>
     navigator.geolocation.getCurrentPosition(
-      (resolve) => console.log(resolve),
-      (reject) => console.log(reject)
+      (position) => resolve(position), // we need the position when we have a resolved promise, that's why we assign the position to the resolove() method!
+      (err) => reject(err)
     )
   );
 };
 
-getPosition().then(() => {
-  console.log();
-});
+getPosition().then((pos) => console.log(pos)); // when we have a resolved Promise, it means we got the Position successfully and we return it to the name of the function => getPosition(). We call the function, it has the position and returns it to the then method() and display it to the console()!
