@@ -12,9 +12,20 @@ const getPosition = () => {
 // async => using async to this function, we make it a special function => a function which is keep running in the background while performing the code inside of it and when is done, it returns a promise!
 // NOTE: ASYNC and AWAIT is only about consuming the Promises - The way we build them is not influence anyway!
 const whereAmI = async (country) => {
+  // Geolocation:
+  const pos = await getPosition();
+  const { latitude: lat, longitude: lng } = pos.coords;
+
+  // Reverse geocoding:
+  const resGeo = await fetch(`https://geocode.xyz/${lat},${lng}?geoit=json`);
+  const dataGeo = await resGeo.json();
+  console.log(dataGeo);
+
   // Here we can have one or more AWAIT statements!
   // after writing await word, we need a promise, which can come from a fetch function => fetch function return a promise and we can await of that result here!
   // AWAIT, wait for the result of the fetch function => it stops the code execution at this point until the promise is fullfilled(untill the data has been fetched in this case!)
+
+  // Country data:
   const res = await fetch(`https://restcountries.com/v3.1/name/${country}`);
   const data = await res.json(); // this returns a new promise and previously we have to continue with .then chain! BUT NOW; we have to AWAIT this and assign it to a new variable! JUST THAT!!!
   console.log(data);
