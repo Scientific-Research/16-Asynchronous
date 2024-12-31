@@ -85,3 +85,14 @@ console.log("FIRST"); // this will be displayed first because whereAmI is an asy
 // btn.addEventListener("click", whereAmI);
 
 // NOTE: WE CAN USE TRY-CATCH() to catch the errors in async-await functions, but try-catch has nothing to do with async-await and it was from beginning of JS. WE CAN NOT USE .CATCH() ANYMORE BECAUSE WE CAN NOT ATTACH IT TO THE .then METHOD ANYMORE, BECAUSE THERE IS NO .then METHOD HERE ANYMORE => THAT'S WHY WE HAVE TO USE TRY-CATCH HERE!
+
+console.log("-------------------TRY-CATCH BLOCK----------------------------");
+
+try {
+  let y = 1;
+  const x = 2;
+  x = 3;
+} catch (err) {
+  console.log("You can not assign a value to a constant!");
+  // alert(err.message); // Assignment to constant variable!
+}
