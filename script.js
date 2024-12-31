@@ -82,8 +82,8 @@ const whereAmI = async () => {
     const data = await res.json(); // this returns a new promise and previously we have to continue with .then chain! BUT NOW; we have to AWAIT this and assign it to a new variable! JUST THAT!!!
     console.log(data);
     renderCountry(data[0]);
+    return `You are in ${dataGeo.city}, ${dataGeo.country}`;
 
-    return `You are in ${dataGeo.city} ${dataGeo.counry}`;
     // QUESTION: IS AWAIT BLOCK OUR CODE IN THIS POINT: OF COURSE NOT! Stopping the execution of an async function in this point is not a problem because the async function is running asynchrounsly in the background, therefore it is not blocking the main thread of execution! and that is special about the async await function which is look like a regualr sync function but in fact in background is running asynchronously!
 
     // As soon as fetch function is resolved(the results of fetching are there), then the result of whole process including await is resolved too and we can store that in a variable like res which is response!
@@ -102,10 +102,17 @@ const whereAmI = async () => {
 console.log("1: Will get location");
 
 // whereAmI("portugal");
-const city = whereAmI(); // JS in this point has no idea what will return from this function back, because this function is still running asyncoronously in background and is not finished yet => Therefore, we get a promose here which is pending and it means it is not fullfilled yet! THE FULLFILLED VALUE WHICH RETURNES THE FUNCTION LATER WOULD BE THIS STRING THAT WE ARE EXPECTING:
-// You are in ${dataGeo.city} ${dataGeo.counry}
+// const city = whereAmI(); // JS in this point has no idea what will return from this function back, because this function is still running asyncoronously in background and is not finished yet => Therefore, we get a promose here which is pending and it means it is not fullfilled yet! THE FULLFILLED VALUE WHICH RETURNES THE FUNCTION LATER WOULD BE THIS STRING THAT WE ARE EXPECTING:
 
-console.log(city); // Promise {<pending>}
+// You are in ${dataGeo.city} ${dataGeo.counry}
+// console.log(city); // Promise {<pending>}
+
+// QUESTION: HOW WE CAN GET THIS STRING AS FULLFILLED VALUE FROM THIS ASYNC FUNCTION:
+// WE CAN NOT USE HERE ASYNC AND AWAIT ANYMORE, RATHER, WE USE LIKE BEFORE, .then() and .catch() METHODS:
+whereAmI()
+  .then((string) => console.log(string)) // You are in Berlin Germany
+  .catch((err) => console.log(err));
+
 console.log("2: Finished getting location");
 // console.log("FIRST"); // this will be displayed first because whereAmI is an async function and is running in the background without blocking our main thread and code will move on to the next line which is this line here and publish 'FIRST' at console!
 
