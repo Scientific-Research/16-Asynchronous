@@ -28,6 +28,13 @@ const renderCountry = (data, className = "") => {
   countriesContainer.style.opacity = 1;
 };
 
+const renderError = (msg) => {
+  // It does the same like insertAdjacentHtml but with text, that's why i added the msg to that(last time a html file added with insertAdjacentHtml)
+  countriesContainer.insertAdjacentText("beforeend", msg);
+  // I added to finally and commented it out here, because anyway it has to be happen no matter of success for promise or a failed promise!
+  countriesContainer.style.opacity = 1; // In this case, the container would be visible => The TEXT or ERROR Message would be visible on the page!
+};
+
 // btn.addEventListener("click", () => {
 //   whereAmI();
 // });
@@ -77,7 +84,8 @@ const whereAmI = async () => {
     //   console.log(res)
     // );
   } catch (err) {
-    console.error(`Something went wrong! ${err.message}`);
+    console.error(`${err}☠️`);
+    renderError(`Something went wrong ☠️! ${err.message}`);
   }
 };
 // whereAmI("portugal");
