@@ -10,4 +10,7 @@ const whereAmI = async (country) => {
   // QUESTION: IS AWAIT BLOCK OUR CODE IN THIS POINT: OF COURSE NOT! Stopping the execution of an async function in this point is not a problem because the async function is running asynchrounsly in the background, therefore it is not blocking the main thread of execution! and that is special about the async await function which is look like a regualr sync function but in fact in background is running asynchronously!
 
   // As soon as fetch function is resolved(the results of fetching are there), then the result of whole process including await is resolved too and we can store that in a variable like res which is response!
+  console.log(res);
 };
+whereAmI("portugal");
+console.log("FIRST"); // this will be displayed first because whereAmI is an async function and is running in the background without blocking our main thread and code will move on to the next line which is this line here and publish 'FIRST' at console!
