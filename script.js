@@ -83,3 +83,5 @@ console.log("FIRST"); // this will be displayed first because whereAmI is an asy
 // NOTE: Before that we have to mess up with .then methods and callback hells, but now, all of the are gone and we have a elegant way of writing the async function using async and await keywords and our code looks like a regular sync function and we assign the result of the resolved Promise to a new variable exactly like a regular sync function!
 
 // btn.addEventListener("click", whereAmI);
+
+// NOTE: WE CAN USE TRY-CATCH() to catch the errors in async-await functions, but try-catch has nothing to do with async-await and it was from beginning of JS. WE CAN NOT USE .CATCH() ANYMORE BECAUSE WE CAN NOT ATTACH IT TO THE .then METHOD ANYMORE, BECAUSE THERE IS NO .then METHOD HERE ANYMORE => THAT'S WHY WE HAVE TO USE TRY-CATCH HERE!
