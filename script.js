@@ -58,6 +58,11 @@ const whereAmI = async () => {
 
     // Reverse geocoding:
     const resGeo = await fetch(`https://geocode.xyz/${lat},${lng}?geoit=json`);
+
+    if (!resGeo.ok) {
+      throw new Error("Problem getting location data!");
+    }
+
     const dataGeo = await resGeo.json();
     console.log(dataGeo);
 
@@ -69,6 +74,11 @@ const whereAmI = async () => {
     const res = await fetch(
       `https://restcountries.com/v3.1/name/${dataGeo.country}`
     );
+
+    if (!res.ok) {
+      throw new Error("Problem getting Country!");
+    }
+
     const data = await res.json(); // this returns a new promise and previously we have to continue with .then chain! BUT NOW; we have to AWAIT this and assign it to a new variable! JUST THAT!!!
     console.log(data);
     renderCountry(data[0]);
