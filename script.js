@@ -102,7 +102,8 @@ const whereAmI = async () => {
 console.log("1: Will get location");
 
 // whereAmI("portugal");
-const city = whereAmI(); // JS in this point has no idea what will return from this function back, because this function is still running asyncoronously in background and is not finished yet => Therefore, we get a promose here which is pending and it means it is not fullfilled yet!
+const city = whereAmI(); // JS in this point has no idea what will return from this function back, because this function is still running asyncoronously in background and is not finished yet => Therefore, we get a promose here which is pending and it means it is not fullfilled yet! THE FULLFILLED VALUE WHICH RETURNES THE FUNCTION LATER WOULD BE THIS STRING THAT WE ARE EXPECTING:
+// You are in ${dataGeo.city} ${dataGeo.counry}
 
 console.log(city); // Promise {<pending>}
 console.log("2: Finished getting location");
