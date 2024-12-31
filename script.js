@@ -98,9 +98,11 @@ const whereAmI = async () => {
     renderError(`Something went wrong ☠️! ${err.message}`);
   }
 };
+console.log("1: Will get location");
 // whereAmI("portugal");
 whereAmI();
-console.log("FIRST"); // this will be displayed first because whereAmI is an async function and is running in the background without blocking our main thread and code will move on to the next line which is this line here and publish 'FIRST' at console!
+console.log("2: Finished getting location");
+// console.log("FIRST"); // this will be displayed first because whereAmI is an async function and is running in the background without blocking our main thread and code will move on to the next line which is this line here and publish 'FIRST' at console!
 
 // NOTE: Before that we have to mess up with .then methods and callback hells, but now, all of the are gone and we have a elegant way of writing the async function using async and await keywords and our code looks like a regular sync function and we assign the result of the resolved Promise to a new variable exactly like a regular sync function!
 
@@ -118,3 +120,5 @@ console.log("-------------------TRY-CATCH BLOCK----------------------------");
 //   console.log("You can not assign a value to a constant!");
 //   // alert(err.message); // Assignment to constant variable!
 // }
+
+console.log("-------------Returning values from ASYNC Functions------------");
