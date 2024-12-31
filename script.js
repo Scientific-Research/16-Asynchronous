@@ -72,7 +72,7 @@ const whereAmI = async () => {
 
     // Country data:
     const res = await fetch(
-      `https://restcountries.com/v3.1/name/${dataGeo.country}`
+      `https://restcountries.com/v3.1/name/${dataGeo.countryqqqq}`
     );
 
     if (!res.ok) {
@@ -110,8 +110,8 @@ console.log("1: Will get location");
 // QUESTION: HOW WE CAN GET THIS STRING AS FULLFILLED VALUE FROM THIS ASYNC FUNCTION:
 // WE CAN NOT USE HERE ASYNC AND AWAIT ANYMORE, RATHER, WE USE LIKE BEFORE, .then() and .catch() METHODS:
 whereAmI()
-  .then((string) => console.log(string)) // You are in Berlin Germany
-  .catch((err) => console.log(err));
+  .then((string) => console.log(`2: ${string}`)) // You are in Berlin Germany
+  .catch((err) => console.log(`2: ${err.message} ☠️☠️<`));
 
 console.log("2: Finished getting location");
 // console.log("FIRST"); // this will be displayed first because whereAmI is an async function and is running in the background without blocking our main thread and code will move on to the next line which is this line here and publish 'FIRST' at console!
