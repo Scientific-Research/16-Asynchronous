@@ -3,7 +3,14 @@ console.log("------------------Consuming Promises with ASYNC/AWAIT------");
 const btn = document.querySelector(".btn-country");
 const countriesContainer = document.querySelector(".countries");
 
+const getPosition = () => {
+  return new Promise((resolve, reject) => {
+    navigator.geolocation.getCurrentPosition(resolve, reject);
+  });
+};
+
 // async => using async to this function, we make it a special function => a function which is keep running in the background while performing the code inside of it and when is done, it returns a promise!
+// NOTE: ASYNC and AWAIT is only about consuming the Promises - The way we build them is not influence anyway!
 const whereAmI = async (country) => {
   // Here we can have one or more AWAIT statements!
   // after writing await word, we need a promise, which can come from a fetch function => fetch function return a promise and we can await of that result here!
