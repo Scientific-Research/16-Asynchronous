@@ -69,6 +69,8 @@ const get3Countries = async (c1, c2, c3) => {
       await getJSON(`https://restcountries.com/v3.1/name/${c3}`),
     ]);
 
+    // NOTE: When one Promise reject, reject all Promises , therefore the Pfromise.all is Short-circuit of the Promises!
+
     // data.forEach((country) => {
     // console.log(country[0].capital); OR
     data.forEach((country) => {
