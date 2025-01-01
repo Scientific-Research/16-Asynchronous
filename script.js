@@ -68,15 +68,15 @@ const timeout = (sec) => {
   return new Promise((_, reject) => {
     setTimeout(() => {
       reject(new Error("Request took too long!"));
-    }, sec);
+    }, sec * 1000);
   });
 };
 
 // AND NOW WE BRING THE timeout() AND A PROMISE TOGETHER in Promise.race() to make a race between them and if the timeout() functions wins because 1 msec is very short  => the Promise.race() will be rejected:
 
 Promise.race([
-  getJSON(`https://restcountries.com/v3.1/name/mexico`),
-  timeout(1), // 1msec
+  getJSON(`https://restcountries.com/v3.1/name/tanzania`),
+  timeout(0.15), // 0.15sec is not enough for fetch function, that's why the winner would be timeout(0.15) function which will is fullfilled faster than fetch function!
 ])
   .then((res) => console.log(res[0]))
   .catch((err) => console.error(err));
