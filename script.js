@@ -72,7 +72,7 @@ const whereAmI = async () => {
 
     // Country data:
     const res = await fetch(
-      `https://restcountries.com/v3.1/name/${dataGeo.countryqqqq}`
+      `https://restcountries.com/v3.1/name/${dataGeo.country}`
     );
 
     if (!res.ok) {
@@ -97,6 +97,9 @@ const whereAmI = async () => {
   } catch (err) {
     console.error(`${err}☠️`);
     renderError(`Something went wrong ☠️! ${err.message}`);
+
+    // Reject promise returned from async function:
+    throw err; // In this case, when there is an error in line 116, the catch() method in line 117 will catch it, otherwise, it will not catch that!
   }
 };
 console.log("1: Will get location");
@@ -111,7 +114,7 @@ console.log("1: Will get location");
 // WE CAN NOT USE HERE ASYNC AND AWAIT ANYMORE, RATHER, WE USE LIKE BEFORE, .then() and .catch() METHODS:
 whereAmI()
   .then((string) => console.log(`2: ${string}`)) // You are in Berlin Germany
-  .catch((err) => console.log(`2: ${err.message} ☠️☠️<`));
+  .catch((err) => console.log(`2: ${err.message} ☠️☠️`));
 
 console.log("2: Finished getting location");
 // console.log("FIRST"); // this will be displayed first because whereAmI is an async function and is running in the background without blocking our main thread and code will move on to the next line which is this line here and publish 'FIRST' at console!
