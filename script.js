@@ -30,7 +30,7 @@ const renderCountry = (data, className = "") => {
 const getJSON = (url, errorMsg = "Something went wrong!") => {
   // NOTE: I have to return the fetch method => In this case, it return Promise like other then methods and therefore, I can chain it to other then methods below!
   return fetch(url).then((response) => {
-    console.log(response);
+    // console.log(response);
     // If we give a correct country name, we will get response.ok:true and response.status: 200
     // If we give an incorrect country name, we will get response.ok:false and response.status:404
 
@@ -45,49 +45,16 @@ const getJSON = (url, errorMsg = "Something went wrong!") => {
   });
 };
 
-console.log("------------- RUNNING PROMISES IN PARALLEL--------------------");
-
-// Imagine that we want to get the data from 3 different countries at the same time and order of received data doesn't matter at all:
-// RUNNING PROMISES IN PARALLEL:
-
-const get3Countries = async (c1, c2, c3) => {
-  // In an async function, we need to wrap up our function in a try-catch block
-  // NOTE: NEVER WORK A ASYNC FUNCTION WITHOUT TRY-CATCH BLOCK:
-
-  try {
-    const [data1] = await getJSON(`https://restcountries.com/v3.1/name/${c1}`);
-    const [data2] = await getJSON(`https://restcountries.com/v3.1/name/${c2}`);
-    const [data3] = await getJSON(`https://restcountries.com/v3.1/name/${c3}`);
-
-    console.log(data1.capital, data2.capital, data3.capital); // ['Lisbon'] ['Ottawa'] ['Dodoma']
-
-    // We don't need to execute all these three links in a sequence. We can execute them in parallel and save the time:
-    // Promise.all takes an array of promises and it will return a new promise(a new array) => It runs all the Promises in the array at the same time!
-    const data = await Promise.all([
-      await getJSON(`https://restcountries.com/v3.1/name/${c1}`),
-      await getJSON(`https://restcountries.com/v3.1/name/${c2}`),
-      await getJSON(`https://restcountries.com/v3.1/name/${c3}`),
-    ]);
-
-    // NOTE: When one Promise reject, reject all Promises , therefore the Promise.all is Short-circuit of the Promises!
-
-    // data.forEach((country) => {
-    // console.log(country[0].capital); OR
-    data.forEach((country) => {
-      console.log(...[country[0].capital[0]]); // ['Lisbon'] ['Ottawa'] ['Dodoma'] They are loaded now in parallel and not in sequence
-    });
-
-    // OR we van use the map to get an array at the end =>
-    data.map((country) => console.log(country[0].capital));
-
-    // OR
-    console.log(data.map((country) => country[0].capital[0]));
-  } catch (err) {
-    console.log(err);
-  }
-};
-
-get3Countries("portugal", "canada", "tanzania");
-
 console.log("---OTHER PROMISE COMBINATORS:RACE,ALLSETTLED and ANY---------");
 
+// Promise.race => receive an array of promise and return a promise:
+
+// Using IIFE:
+(async () => {
+  const res = await Promise.race([
+    getJSON(`https://restcountries.com/v3.1/name/italy `),
+    getJSON(`https://restcountries.com/v3.1/name/egypt`),
+    getJSON(`https://restcountries.com/v3.1/name/mexico`),
+  ]);
+  console.log(res[0]);
+})();
