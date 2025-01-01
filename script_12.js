@@ -88,6 +88,3 @@ const get3Countries = async (c1, c2, c3) => {
 };
 
 get3Countries("portugal", "canada", "tanzania");
-
-console.log("---OTHER PROMISE COMBINATORS:RACE,ALLSETTLED and ANY---------");
-
