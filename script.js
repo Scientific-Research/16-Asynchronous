@@ -47,15 +47,17 @@ const getJSON = (url, errorMsg = "Something went wrong!") => {
 
 console.log("---OTHER PROMISE COMBINATORS:RACE,ALLSETTLED and ANY---------");
 
-// Promise.race => receive an array of promise and return a promise:
+// Promise.race => receive an array of promise and return only a promise:
 
 // Using IIFE:
 (async () => {
   const res = await Promise.race([
-    getJSON(`https://restcountries.com/v3.1/name/italy `),
+    getJSON(`https://restcountries.com/v3.1/name/italy`),
     getJSON(`https://restcountries.com/v3.1/name/egypt`),
     getJSON(`https://restcountries.com/v3.1/name/mexico`),
   ]);
-  // THESE THREE PROMISES RACE AGAINST EACH OTHER LIKE IN A REAL RACE! IF THE WINNING PROMISE IS A FULLFILLED PROMISE, THEN WE SEE THE INFO FOR THIS FULLFILEDD PROMISE ON THE CONSOLE.LOG() => IT DEPENDS, WHICH PROMISE IS FASTER THAN ANOTHER ONE, THIS PROMISE WILL WIN AND WE SEE THE RESULT OF THIS PROMISE IN CONSOLE.LOG()!
+  // THESE THREE PROMISES RACE AGAINST EACH OTHER LIKE IN A REAL RACE! IF THE WINNING PROMISE IS A FULLFILLED PROMISE, THEN WE SEE THE INFO FOR THIS FULLFILEDD PROMISE ON THE CONSOLE.LOG() => IT DEPENDS, WHICH PROMISE IS FASTER THAN ANOTHER ONE, THIS PROMISE WILL WIN AND WE SEE THE RESULT OF THIS PROMISE IN CONSOLE.LOG()! => In network Tab, we can see which Promise takes shorter time to be fetched => and this Promise is WINNER at the end and we have the info about this Promise in console.log()!
+
+  // THE Promise which is rejected can win the race too! It means Promise.race() is short-circuited whenever one of the Promises get settled(No matter is fullfilled or rejected!)
   console.log(res[0]);
 })();
