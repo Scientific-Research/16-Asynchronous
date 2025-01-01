@@ -71,8 +71,8 @@ const get3Countries = async (c1, c2, c3) => {
 
     // data.forEach((country) => {
     // console.log(country[0].capital); OR
-    data.forEach(([country]) => {
-      console.log(...[country.capital]); // ['Lisbon'] ['Ottawa'] ['Dodoma'] They are loaded now in parallel and not in sequence
+    data.forEach((country) => {
+      console.log(...[country[0].capital[0]]); // ['Lisbon'] ['Ottawa'] ['Dodoma'] They are loaded now in parallel and not in sequence
     });
 
     // OR we van use the map to get an array at the end =>
