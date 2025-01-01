@@ -124,9 +124,14 @@ whereAmI()
 
 // CONVERTING THE .then() PART TO async AND await => USING IIFE TO IMPLEMENT AND CALL TAHT:
 (async () => {
-  const string = await whereAmI();
-  console.log(string);
-})();
+  try {
+    const string = await whereAmI();
+    console.log(string); // You are in Berlin, Germany
+  } catch (err) {
+    console.log(`${err.message} ☠️`);
+  }
+  console.log("3: Finished getting location");
+})(); // with these two open and close Parantheses, we call an IIFE function!
 
 // console.log("FIRST"); // this will be displayed first because whereAmI is an async function and is running in the background without blocking our main thread and code will move on to the next line which is this line here and publish 'FIRST' at console!
 
