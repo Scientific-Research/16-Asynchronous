@@ -61,3 +61,12 @@ console.log("---OTHER PROMISE COMBINATORS:RACE,ALLSETTLED and ANY---------");
   // THE Promise which is rejected can win the race too! It means Promise.race() is short-circuited whenever one of the Promises get settled(No matter is fullfilled or rejected!)
   console.log(res[0]);
 })();
+
+// ANOTHER EXAMPLE WITH Promise.race()
+const timeout = (sec) => {
+  return new Promise((_, reject) => {
+    setTimeout(() => {
+      reject(new Error("Request took too long!"));
+    }, sec);
+  });
+};
