@@ -103,3 +103,16 @@ Promise.all([
 ])
   .then((res) => console.log(res)) // 1: Uncaught (in promise) ERROR => we get an error because of this Promise => Promise.reject("ERROR")
   .catch((err) => console.error(err)); // ERROR => because Promise.all will short-circuit if there is one rejected Promise which we have one here =>  Promise.reject("ERROR")
+
+console.log("-----------------------------Promise.any----------------------");
+
+// Promise.any [ES2021] => Takes an array of multiple Promises and returns the FIRST fullfilled Promise! IT simply ignores the rejected Promises! Therefore the result of Promise.any would be always a fullfilled Promise, unless all of them are rejected ones which in this case, will be ignored!
+
+// NOTE: Promise.any is very similar to Promise.race and the only difference is: Promise.any ignores the rejected Promise!
+Promise.any([
+  Promise.resolve("Success"),
+  Promise.reject("ERROR"),
+  Promise.resolve("Another success"),
+])
+  .then((res) => console.log(res)) // Success
+  .catch((err) => console.error(err));
