@@ -80,3 +80,17 @@ Promise.race([
 ])
   .then((res) => console.log(res[0]))
   .catch((err) => console.error(err));
+
+console.log("--------------Promise.allSettled--------------------------------");
+
+// It takes an array of promises and returns an array of all settled promises! Not matter if Promise is rejected or not!
+
+// The difference between Promise.allSettled and Promise.all is that we have short-circuit in Promise.all => when a Promise is fullfilled or rejected, It returns that and doesn't continue anymore.
+// BUT in Promise.allSettled, we don't have short-circuit and it returns an array containing of ALL rejected and resolevd Promises!
+
+// A VERY SIMPLE AND FAST EXAMPLE WHICH IS ALREADY CLEAR WHICH ONE IS RESOLVE AN WHICH ONE IS REJECT => we don't use one with fetch function or something similar that we have to wait for that to be resolved(fullfilled)!
+Promise.allSettled([
+  Promise.resolve("Success"),
+  Promise.reject("ERROR"),
+  Promise.resolve("Another success"),
+]).then((res) => console.log(res)); // (3) [{…}, {…}, {…}] It gives us an array of all the Promises, even with one rejected Promise(Promise.reject("ERROR")!
