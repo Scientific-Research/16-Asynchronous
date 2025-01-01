@@ -64,9 +64,19 @@ console.log("---OTHER PROMISE COMBINATORS:RACE,ALLSETTLED and ANY---------");
 
 // ANOTHER EXAMPLE WITH Promise.race()
 const timeout = (sec) => {
+  // We don't need resolve section here, that's why we use underline(_) here!
   return new Promise((_, reject) => {
     setTimeout(() => {
       reject(new Error("Request took too long!"));
     }, sec);
   });
 };
+
+// AND NOW WE BRING THE timeout() AND A PROMISE TOGETHER in Promise.race() to make a race between them and if the timeout() functions wins because 1 msec is very short  => the Promise.race() will be rejected:
+
+Promise.race([
+  getJSON(`https://restcountries.com/v3.1/name/mexico`),
+  timeout(1), // 1msec
+])
+  .then((res) => console.log(res[0]))
+  .catch((err) => console.error(err));
