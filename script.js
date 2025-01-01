@@ -94,3 +94,12 @@ Promise.allSettled([
   Promise.reject("ERROR"),
   Promise.resolve("Another success"),
 ]).then((res) => console.log(res)); // (3) [{…}, {…}, {…}] It gives us an array of all the Promises, even with one rejected Promise(Promise.reject("ERROR")!
+
+// IN CONTRAST TO Promise.all =>
+Promise.all([
+  Promise.resolve("Success"),
+  Promise.reject("ERROR"),
+  Promise.resolve("Another success"),
+])
+  .then((res) => console.log(res)) // 1: Uncaught (in promise) ERROR => we get an error because of this Promise => Promise.reject("ERROR")
+  .catch((err) => console.error(err)); // ERROR => because Promise.all will short-circuit if there is one rejected Promise which we have one here =>  Promise.reject("ERROR")
