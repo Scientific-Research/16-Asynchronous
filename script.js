@@ -62,7 +62,7 @@ const get3Countries = async (c1, c2, c3) => {
     console.log(data1.capital, data2.capital, data3.capital); // ['Lisbon'] ['Ottawa'] ['Dodoma']
 
     // We don't need to execute all these three links in a sequence. We can execute them in parallel and save the time:
-    // Promise.all takes an array of promises and it will return a new promise => It runs all the Promises in the array at the same time!
+    // Promise.all takes an array of promises and it will return a new promise(a new array) => It runs all the Promises in the array at the same time!
     const data = await Promise.all([
       await getJSON(`https://restcountries.com/v3.1/name/${c1}`),
       await getJSON(`https://restcountries.com/v3.1/name/${c2}`),
@@ -72,8 +72,14 @@ const get3Countries = async (c1, c2, c3) => {
     // data.forEach((country) => {
     // console.log(country[0].capital); OR
     data.forEach(([country]) => {
-      console.log(country.capital);
+      console.log(...[country.capital]); // ['Lisbon'] ['Ottawa'] ['Dodoma'] They are loaded now in parallel and not in sequence
     });
+
+    // OR we van use the map to get an array at the end =>
+    data.map((country) => console.log(country[0].capital));
+
+    // OR
+    console.log(data.map((country) => country[0].capital[0]));
   } catch (err) {
     console.log(err);
   }
