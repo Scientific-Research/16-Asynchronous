@@ -114,9 +114,12 @@ console.log("1: Will get location");
 // WE CAN NOT USE HERE ASYNC AND AWAIT ANYMORE, RATHER, WE USE LIKE BEFORE, .then() and .catch() METHODS:
 whereAmI()
   .then((string) => console.log(`2: ${string}`)) // You are in Berlin Germany
-  .catch((err) => console.log(`2: ${err.message} ☠️☠️`));
+  .catch((err) => console.log(`2: ${err.message} ☠️☠️`))
+  // finally is executed anyway and as the last operation, that's why we see the execution order 1, 2, 3
+  .finally(() => console.log("3: Finished getting location"));
 
-console.log("2: Finished getting location");
+// console.log("3: Finished getting location")
+
 // console.log("FIRST"); // this will be displayed first because whereAmI is an async function and is running in the background without blocking our main thread and code will move on to the next line which is this line here and publish 'FIRST' at console!
 
 // NOTE: Before that we have to mess up with .then methods and callback hells, but now, all of the are gone and we have a elegant way of writing the async function using async and await keywords and our code looks like a regular sync function and we assign the result of the resolved Promise to a new variable exactly like a regular sync function!
